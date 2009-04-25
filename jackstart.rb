@@ -29,7 +29,7 @@ generate(:cucumber)
 if yes?("Do you want to build a blog?") 
   generate(:nifty_scaffold, "post", "subject:string", "body:text", "--haml")
 
-  generate(:nifty_scaffold, "comment", "email:string", "body:text", "post_id:integer", "--haml", "--ajaxify") 
+  generate(:nifty_nested_scaffold, "post", "comment", "email:string", "body:text", "post_id:integer", "--haml", "--ajaxify") 
 
   generate(:nifty_authentication, "--haml")
 

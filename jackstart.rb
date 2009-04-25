@@ -20,121 +20,7 @@ end
 
 rake "db:create"
 
-
-file 'app/views/layouts/application.html.haml', <<-CODE
-
-!!! Strict
-%html{html_attrs('en-US')}
-  %head
-    %title Jack Russell Software Starter Kit
-    = render :partial => "shared/stylesheets"
-  %body
-    = render :partial => "shared/javascripts"
-    
-    = flash[:notice]
-    = flash[:error]
-    = flash[:success]
-
-    #container{:class => "container"}
-      = render :partial => "shared/header"
-      = render :partial => "shared/navigation"
-
-      #content.span-24
-        = yield
-    = render :partial => "shared/footer"
-
-
-CODE
-
-file 'app/views/shared/_stylesheets.html.haml', <<-CODE
-= stylesheet_link_tag 'http://s3.amazonaws.com/jrs.blueprint-css/screen.css', :media => "screen, projection"
-= stylesheet_link_tag 'http://s3.amazonaws.com/jrs.blueprint-css/print.css', :media => "print"
-
-/[if IE] <link rel="stylesheet" href="http://s3.amazonaws.com/jrs.blueprint-css/ie.css" type="text/css" media="screen, projection" />
-/[if lte IE 7] <style type="text/css"> html .ddsmoothmenu{height: 1%;} /*Holly Hack for IE7 and below*/ </style>
-= stylesheet_link_tag 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.7.0/themes/redmond/jquery-ui.css'
-= stylesheet_link_tag 'http://s3.amazonaws.com/jackhq.cdn/stylesheets/ddsmoothmenu.css'
-= stylesheet_link_tag 'application.css'
-CODE
-
-file 'app/views/shared/_javascripts.html.haml', <<-CODE
-
-= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"
-= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/jquery-ui.min.js"
-= javascript_include_tag "http://s3.amazonaws.com/jackhq.cdn/javascripts/ddsmoothmenu.js"
-= javascript_include_tag "application.js"
-CODE
-
-
-file 'app/views/shared/_header.html.haml', <<-CODE
-#header
-  %h1= link_to "Jack Russell Software Template"
-  %small Template Application
-CODE
-
-file 'app/views/shared/_footer.html.haml', <<-CODE
-#footer
-  %p{:style => "margin-left:10px;"} All Rights Reserved....
-CODE
-
-file 'app/views/shared/_navigation.html.haml', <<-CODE
-.navigation{ :class => "span-24 ui-corner-all ddsmoothmenu" }
-  %ul
-    %li= link_to "Home", "#", :class => "ui-corner-left"
-CODE
-
-file 'public/stylesheets/application.css', <<-CODE
-body {
-	background: #DDDDDD url(http://s3.amazonaws.com/jackhq.cdn/images/bg.gif) repeat-x;
-	width: 960px;
-	color: #000000;
-	margin: 0px auto 0px;
-	padding: 0px;
-	
-	}
-	
-#container {
-	background: whitesmoke;
-	width: 950px;
-	margin: 10px auto 10px;
-	padding: 0px 20px 20px 20px;
-	/* border: double #C0C0C0; */
-	}
-	
-label {
-	display : block;
-}
-
-.post-content-widget {
-	margin-top:20px;
-}
-
-.post-content-widget h3 {
-	margin:0px;
-	padding:10px;
-}
-
-.post-content-widget h3 a {
-	text-decoration:none;
-
-}
-
-
-.post-content-widget-details {
-	padding:10px;
-}
-
-CODE
-
-file 'public/javascripts/application.js', <<-CODE
-$(document).ready( function(){
-	$('.main').addClass("ui-widget post-content-widget");
-	$('.main > h3').addClass("ui-widget-header  ui-corner-top");
-	$('.main > .clearfix').addClass("ui-widget-content ui-corner-bottom post-content-widget-details");
-});
-CODE
-
-
+generate(:nifty_layout, "--haml")
 
 generate(:rspec)
 generate(:cucumber)
@@ -142,7 +28,7 @@ generate(:cucumber)
 if yes?("Do you want to build a blog?") 
   generate(:nifty_scaffold, "post", "subject:string", "body:text", "--haml")
 
-  generate(:nifty_scaffold, "comment", "email:string", "body:text", "post_id:integer", "--haml") 
+  generate(:nifty_scaffold, "comment", "email:string", "body:text", "post_id:integer", "--haml", "--ajaxify") 
 
   generate(:nifty_authentication, "--haml")
 

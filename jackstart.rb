@@ -8,7 +8,7 @@ gem "thoughtbot-factory_girl", :lib => "factory_girl", :source => "http://gems.g
 rake("gems:install", :sudo => true)
 
 inside() do
-  run "sudo gem install nifty-generators --no-rdoc --no-ri"
+  run "sudo gem install twilson63-nifty-generators --no-rdoc --no-ri"
   run "haml --rails ."
   run "rm public/index.html"
   run "rm public/javascripts/control.js"

@@ -202,11 +202,13 @@ end
   CODE
   
   file 'app/views/posts/show.html.haml', <<-CODE
-%h3=h @post.subject
-%hr
-= @post.body
-%hr
-= render :partial => 'comments/comments', :object => @post.comments
+.main
+  %h3=h @post.subject
+  .clearfix
+    = @post.body
+    %hr
+    = render :partial => 'comments/comments', :object => @post.comments
+
   
   CODE
 

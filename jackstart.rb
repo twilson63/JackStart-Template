@@ -206,7 +206,7 @@ end
 %hr
 = @post.body
 %hr
-= render :partial => 'comments/comments', @post.comments
+= render :partial => 'comments/comments', :object => @post.comments
   
   CODE
 

@@ -199,6 +199,17 @@ ActionController::Routing::Routes.draw do |map|
   map.connect ':controller/:action/:id.:format'
 end
   
+  CODE
+  
+  file 'app/views/posts/show.html.haml', <<-CODE
+
+%h3=h @post.subject
+%hr
+= @post.body
+%hr
+= render :partial => "comments/comments", @post.comments
+  
+  
   CODE  
 
   
